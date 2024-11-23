@@ -1,0 +1,32 @@
+admin-panel/
+├── login/
+│   ├── Single login for admin
+│   ├── OTP verification
+│
+├── homepage/
+│   ├── Total complaints
+│   ├── Action taken
+│   ├── Pending actions
+│   ├── Graphs and statistics
+│   ├── Search functionality
+│       ├── Search by ID
+│       ├── Search by name
+│       ├── Search by vehicle ID
+│
+├── complaints/
+│   ├── Complaints raised by users
+│       ├── User ID
+│       ├── Name
+│       ├── Vehicle details
+│       ├── Other personal details
+│       ├── Complaint overview
+│       │   ├── Detailed view
+│       │       ├── Reply and resolution
+│   ├── Complaints against users
+│       ├── Complaint overview
+│       │   ├── Detailed view
+│       │       ├── Reply and resolution
+│
+├── ratings/
+│   ├── Overall rating
+│       ├── Overview
