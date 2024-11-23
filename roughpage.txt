@@ -1,0 +1,17 @@
+Login page - First time - session will be timed
+Home page - Dashboard - Your reviews (big counter side me)
+                      - Reviews about you (big counter side me)
+                      - Current Rating (with an emoji)
+                      - A floating button side me - quick snap
+                      - Your Profile - Form - fetch details like name car model color private vehicle or cab
+Your reviews page - List of all reviews written by you 
+                  - On Click - Will contain - Date, time
+                                 - Image attached
+                                 - Review Written 
+                                 - Rating Given
+Rewards page - You earned - "work in progress (optional page hoga)"
+
+CV Model Plan - Use two models - YOLO for Vehicle Detection 
+                               - Another model from huggingface for OCR on the license plate
+                               - A comparision model for filters applied on the vehicles - for better OCR
+                               - A seperate filter for different lighting conditions - for better OCR in every type of image
