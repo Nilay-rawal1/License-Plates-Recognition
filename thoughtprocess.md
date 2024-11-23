@@ -38,3 +38,11 @@ License Plate Recognition (LPR) involves two primary tasks: detecting the licens
 ## Conclusion
 
 By following this structured approach and focusing on each component of the LPR system—localization, segmentation, OCR, and post-processing—you can effectively optimize a computer vision model for detecting and reading license plates. Continuous evaluation and adaptation of your models based on real-world performance will further enhance their reliability and accuracy in various applications such as traffic management and law enforcement.
+
+
+**Model Thought process**
+Advancements in Successor Models:
+Subsequent models like YOLOv4 and YOLOv5 have built upon the strengths of YOLOv3 by incorporating advanced techniques such as improved loss functions and enhanced backbone networks to further boost both speed and accuracy 15. For instance, YOLOv5 has been reported to achieve higher performance metrics while reducing model size, making it more efficient for deployment in real-world applications
+
+#Considering using YOLOV5
+

@@ -71,7 +71,14 @@ def detect_from_image(image_path):
     # Draw detections
     output_image = detector.draw_detections(image, detections)
     
-    # Save result
+    # Extract and save ROIs for each detected vehicle
+    for i, detection in enumerate(detections):
+        vehicle_roi = extract_vehicle_roi(image, detection)
+        roi_path = f'vehicle_roi_{i}_{image_path.split("/")[-1]}'
+        cv2.imwrite(roi_path, vehicle_roi)
+        print(f"Saved vehicle ROI as {roi_path}")
+    
+    # Save result with all detections marked
     output_path = 'output_' + image_path.split('/')[-1]
     cv2.imwrite(output_path, output_image)
     print(f"Processed image saved as {output_path}")
@@ -81,5 +88,34 @@ def test_vehicle_detection():
     image_path = 'sample.jpg'
     detect_from_image(image_path)
 
+
+def extract_vehicle_roi(image, detection):
+    """Extract Region of Interest (ROI) for a detected vehicle
+    Args:
+        image: numpy array of the original image
+        detection: list containing [x1, y1, x2, y2, confidence]
+    Returns:
+        cropped_image: numpy array containing just the vehicle region
+    """
+    x1, y1, x2, y2, _ = detection
+    
+    # Add a small padding around the detection (5% of width/height)
+    height, width = image.shape[:2]
+    pad_x = int(0.05 * (x2 - x1))
+    pad_y = int(0.05 * (y2 - y1))
+    
+    # Ensure coordinates stay within image bounds
+    roi_x1 = max(0, x1 - pad_x)
+    roi_y1 = max(0, y1 - pad_y)
+    roi_x2 = min(width, x2 + pad_x)
+    roi_y2 = min(height, y2 + pad_y)
+    
+    # Crop the image to the ROI
+    vehicle_roi = image[roi_y1:roi_y2, roi_x1:roi_x2]
+    
+    return vehicle_roi
+
 if __name__ == "__main__":
     test_vehicle_detection()
+
+
