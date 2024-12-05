@@ -1,7 +1,10 @@
 import 'dart:ui';
 import 'package:driver_review_capstone/models/review_model.dart';
 
-const Color primaryColor = Color(0xFF3870BE);
+const Color kPrimaryColor = Color(0xFF3870BE);
+const Color kDark = Color(0xFF10142D);
+const Color kGrey = Color(0xFF888A9D);
+Color kFocusColor = const Color(0xFF3870BE).withOpacity(0.1);
 
 final List<ReviewModel> reviews = [
   ReviewModel(

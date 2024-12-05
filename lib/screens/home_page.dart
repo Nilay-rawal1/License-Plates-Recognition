@@ -16,7 +16,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: primaryColor,
+        backgroundColor: kPrimaryColor,
         title: Text(
           'Driver Review',
           style: TextStyle(
@@ -26,7 +26,7 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: primaryColor,
+        backgroundColor: kPrimaryColor,
         onPressed: () {
           Navigator.push(
             context,

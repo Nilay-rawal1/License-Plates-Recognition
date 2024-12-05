@@ -30,7 +30,7 @@ class _AddReviewState extends State<AddReview> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: primaryColor,
+        backgroundColor: kPrimaryColor,
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
@@ -64,7 +64,7 @@ class _AddReviewState extends State<AddReview> {
       onPressed: () {
         pickImage();
       },
-      style: TextButton.styleFrom(backgroundColor: primaryColor),
+      style: TextButton.styleFrom(backgroundColor: kPrimaryColor),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 10.0),
         child: SizedBox(
@@ -156,12 +156,12 @@ class _AddReviewState extends State<AddReview> {
                 borderRadius: BorderRadius.circular(20.0),
               ),
               focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: primaryColor, width: 2.0),
+                borderSide: BorderSide(color: kPrimaryColor, width: 2.0),
                 borderRadius: BorderRadius.circular(20.0),
               ),
               suffixIcon: const Icon(
                 Icons.mic,
-                color: primaryColor,
+                color: kPrimaryColor,
               ),
             ),
           ),
@@ -170,7 +170,7 @@ class _AddReviewState extends State<AddReview> {
           ),
           TextButton(
             onPressed: () {},
-            style: TextButton.styleFrom(backgroundColor: primaryColor),
+            style: TextButton.styleFrom(backgroundColor: kPrimaryColor),
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(

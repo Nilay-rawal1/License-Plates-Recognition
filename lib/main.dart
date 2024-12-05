@@ -1,3 +1,4 @@
+import 'package:driver_review_capstone/screens/authentication/login_page.dart';
 import 'package:driver_review_capstone/screens/home_page.dart';
 import 'package:flutter/material.dart';
 
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      home: const HomePage(),
+      home: const LoginPage(),
     );
   }
 }
