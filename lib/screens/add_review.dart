@@ -1,10 +1,13 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:image_picker/image_picker.dart';
 import '../const/constants.dart';
 
 class AddReview extends StatefulWidget {
-  const AddReview({super.key});
+  final File? image;
+
+  const AddReview({super.key, this.image});
 
   @override
   State<AddReview> createState() => _AddReviewState();
@@ -26,25 +29,26 @@ class _AddReviewState extends State<AddReview> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    if (widget.image != null) {
+      selectedImage = widget.image;
+      isImageUploaded = true; // Set to true when image is passed
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: kPrimaryColor,
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: Icon(
-            Icons.arrow_back,
-            color: Colors.white,
-          ),
-        ),
+        backgroundColor: Colors.transparent,
         title: Text(
           'Add Review',
           style: TextStyle(
             fontWeight: FontWeight.bold,
-            color: Colors.white,
+            color: kDark,
           ),
         ),
       ),
@@ -129,8 +133,52 @@ class _AddReviewState extends State<AddReview> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Icon(
-                Icons.rate_review_outlined,
+                Icons.star_rate_outlined,
                 size: 24.0,
+                color: kDark,
+              ),
+              SizedBox(
+                width: 10.0,
+              ),
+              Text(
+                'Rating',
+                style: TextStyle(
+                  fontSize: 18.0,
+                  fontWeight: FontWeight.w600,
+                  color: kDark,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 10.0,
+          ),
+          RatingBar.builder(
+            initialRating: 0.0,
+            minRating: 0.5,
+            direction: Axis.horizontal,
+            allowHalfRating: true,
+            unratedColor: Colors.grey[400],
+            itemCount: 5,
+            itemPadding: EdgeInsets.symmetric(horizontal: 0.5),
+            itemBuilder: (context, _) => Icon(
+              Icons.star,
+              color: kPrimaryColor,
+            ),
+            onRatingUpdate: (rating) {
+              print(rating);
+            },
+          ),
+          SizedBox(
+            height: 20.0,
+          ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.add_comment_outlined,
+                size: 24.0,
+                color: kDark,
               ),
               SizedBox(
                 width: 10.0,
@@ -140,7 +188,7 @@ class _AddReviewState extends State<AddReview> {
                 style: TextStyle(
                   fontSize: 18.0,
                   fontWeight: FontWeight.w600,
-                  color: Colors.black,
+                  color: kDark,
                 ),
               ),
             ],

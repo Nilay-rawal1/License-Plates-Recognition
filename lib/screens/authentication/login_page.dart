@@ -1,7 +1,7 @@
 import 'package:driver_review_capstone/const/constants.dart';
 import 'package:driver_review_capstone/custom_widgets/custom_text_field.dart';
 import 'package:driver_review_capstone/screens/authentication/signup_page.dart';
-import 'package:driver_review_capstone/screens/home_page.dart';
+import 'package:driver_review_capstone/screens/navigation_page.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -170,7 +170,9 @@ class _LoginPageState extends State<LoginPage> with WidgetsBindingObserver {
                         Navigator.pop(context);
                         Navigator.pushAndRemoveUntil(
                           context,
-                          MaterialPageRoute(builder: (context) => HomePage()),
+                          MaterialPageRoute(
+                            builder: (context) => NavigationPage(),
+                          ),
                           (Route<dynamic> route) => false,
                         );
                       } else {

@@ -1,8 +1,8 @@
 import 'package:driver_review_capstone/custom_widgets/custom_text_field.dart';
 import 'package:driver_review_capstone/screens/authentication/login_page.dart';
+import 'package:driver_review_capstone/screens/navigation_page.dart';
 import 'package:flutter/material.dart';
 import '../../const/constants.dart';
-import '../home_page.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({super.key});
@@ -231,7 +231,7 @@ class _SignupPageState extends State<SignupPage> {
                     Navigator.pop(context);
                     Navigator.pushAndRemoveUntil(
                       context,
-                      MaterialPageRoute(builder: (context) => HomePage()),
+                      MaterialPageRoute(builder: (context) => NavigationPage()),
                       (Route<dynamic> route) => false,
                     );
                   },

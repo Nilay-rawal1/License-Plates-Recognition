@@ -1,5 +1,4 @@
 import 'package:driver_review_capstone/screens/authentication/login_page.dart';
-import 'package:driver_review_capstone/screens/home_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
