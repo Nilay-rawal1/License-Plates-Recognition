@@ -15,6 +15,9 @@ class _SignupPageState extends State<SignupPage> {
   final TextEditingController firstNameController = TextEditingController();
   final TextEditingController lastNameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
   final TextEditingController licenseController = TextEditingController();
   final TextEditingController numberPlateController = TextEditingController();
 
@@ -122,6 +125,44 @@ class _SignupPageState extends State<SignupPage> {
                 height: 10.0,
               ),
               Text(
+                'Password',
+                style: TextStyle(
+                  fontSize: 18.0,
+                  fontWeight: FontWeight.w600,
+                  color: kDark,
+                ),
+              ),
+              SizedBox(
+                height: 8.0,
+              ),
+              CustomTextField(
+                hintText: 'Password',
+                controller: passwordController,
+                isObscure: true,
+              ),
+              SizedBox(
+                height: 10.0,
+              ),
+              Text(
+                'Confirm password',
+                style: TextStyle(
+                  fontSize: 18.0,
+                  fontWeight: FontWeight.w600,
+                  color: kDark,
+                ),
+              ),
+              SizedBox(
+                height: 8.0,
+              ),
+              CustomTextField(
+                hintText: 'Confirm password',
+                controller: confirmPasswordController,
+                isObscure: true,
+              ),
+              SizedBox(
+                height: 10.0,
+              ),
+              Text(
                 "Driver's license no.",
                 style: TextStyle(
                   fontSize: 17.0,
@@ -165,7 +206,6 @@ class _SignupPageState extends State<SignupPage> {
               CustomTextField(
                 hintText: 'Number plate',
                 controller: numberPlateController,
-                keyboardType: TextInputType.emailAddress,
                 isLast: true,
               ),
               SizedBox(
@@ -215,6 +255,8 @@ class _SignupPageState extends State<SignupPage> {
               ),
               GestureDetector(
                 onTap: () async {
+                  FocusScope.of(context).unfocus();
+                  await Future.delayed(const Duration(milliseconds: 400));
                   Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(builder: (context) => LoginPage()),
