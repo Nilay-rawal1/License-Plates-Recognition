@@ -1,3 +1,5 @@
 Vision-based vehicle detection and counting system using deep learning in highway scenes {https://etrr.springeropen.com/articles/10.1186/s12544-019-0390-4}
 Research on vehicle detection based on improved YOLOX_S {https://www.nature.com/articles/s41598-023-50306-x}
 A review of vehicle detection methods based on computer vision {https://www.sciopen.com/article/10.26599/JICV.2023.9210019}
+-----Using this model for license plate recognition-----
+https://huggingface.co/spaces/nickmuchi/license-plate-detection-with-YOLOS

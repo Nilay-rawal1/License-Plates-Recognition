@@ -1,6 +1,47 @@
 import cv2
 import numpy as np
 from ultralytics import YOLO
+from datetime import datetime
+import pytesseract
+# Set Tesseract CMD path - update this path to match your installation
+pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+
+class ImageFilter:
+    @staticmethod
+    def determine_lighting_condition(image):
+        """
+        Determine lighting condition based on image brightness
+        Returns: 'morning', 'evening', or 'night'
+        """
+        # Convert to HSV for better brightness analysis
+        hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+        brightness = np.mean(hsv[:, :, 2])
+        
+        if brightness > 150:
+            return 'morning'
+        elif brightness > 100:
+            return 'evening'
+        else:
+            return 'night'
+    
+    @staticmethod
+    def apply_filter(image, lighting):
+        """
+        Apply appropriate filter based on lighting condition
+        """
+        if lighting == 'morning':
+            # For well-lit conditions: minor contrast enhancement
+            return cv2.convertScaleAbs(image, alpha=1.1, beta=0)
+        
+        elif lighting == 'evening':
+            # For evening: increase brightness and contrast
+            return cv2.convertScaleAbs(image, alpha=1.3, beta=30)
+        
+        else:  # night
+            # For night: aggressive contrast enhancement and denoise
+            gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+            denoised = cv2.fastNlMeansDenoising(gray)
+            return cv2.equalizeHist(denoised)
 
 class VehicleDetector:
     def __init__(self):
@@ -65,8 +106,22 @@ def detect_from_image(image_path):
         print(f"Error: Could not read image at {image_path}")
         return
     
-    # Detect vehicles
-    detections = detector.detect_vehicles(image)
+    # Apply appropriate filter based on lighting
+    img_filter = ImageFilter()
+    lighting = img_filter.determine_lighting_condition(image)
+    filtered_image = img_filter.apply_filter(image, lighting)
+    
+    print(f"Detected lighting condition: {lighting}")
+    
+    # Save filtered image for debugging
+    cv2.imwrite(f'filtered_{lighting}_{image_path.split("/")[-1]}', 
+                filtered_image if lighting != 'night' else cv2.cvtColor(filtered_image, cv2.COLOR_GRAY2BGR))
+    
+    # Detect vehicles on filtered image
+    if lighting == 'night':
+        # Convert back to BGR for YOLO if it's grayscale
+        filtered_image = cv2.cvtColor(filtered_image, cv2.COLOR_GRAY2BGR)
+    detections = detector.detect_vehicles(filtered_image)
     
     # Draw detections
     output_image = detector.draw_detections(image, detections)
@@ -88,6 +143,18 @@ def test_vehicle_detection():
     image_path = 'sample.jpg'
     detect_from_image(image_path)
 
+
+def perform_ocr(image):
+    """
+    Perform OCR using Tesseract
+    Returns: recognized text
+    """
+    try:
+        text = pytesseract.image_to_string(image, config='--psm 7')
+        return text.strip()
+    except Exception as e:
+        print(f"OCR error: {e}")
+        return ""
 
 def extract_vehicle_roi(image, detection):
     """Extract Region of Interest (ROI) for a detected vehicle
@@ -112,6 +179,11 @@ def extract_vehicle_roi(image, detection):
     
     # Crop the image to the ROI
     vehicle_roi = image[roi_y1:roi_y2, roi_x1:roi_x2]
+    
+    # Attempt OCR
+    text = perform_ocr(vehicle_roi)
+    if text:
+        print(f"OCR result: {text}")
     
     return vehicle_roi
 

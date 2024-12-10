@@ -46,3 +46,14 @@ Subsequent models like YOLOv4 and YOLOv5 have built upon the strengths of YOLOv3
 
 #Considering using YOLOV5
 
+
+
+
+Thinking of three different filters for image recognition based on the color of the sky - indicating the time fo the day.
+If we change the filter we can extract license plates more efficiently.
+three filters - Well Lit - morning
+              - Evening - some light
+              - Night - black and white (aggressive mode)
+
+After the filter, we can use two models for now to compare (look for two license plate ocr models) and we pick the one with higher accuracy rate
+
