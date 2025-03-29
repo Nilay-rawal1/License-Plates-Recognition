@@ -3,6 +3,7 @@ import 'package:driver_review_capstone/custom_widgets/custom_text_field.dart';
 import 'package:driver_review_capstone/screens/authentication/signup_page.dart';
 import 'package:driver_review_capstone/screens/navigation_page.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -13,8 +14,8 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> with WidgetsBindingObserver {
   final ScrollController _scrollController = ScrollController();
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController emailController = TextEditingController(); //admin@email.com
+  final TextEditingController passwordController = TextEditingController(); //admin
   bool _emailValidate = false;
   bool _passwordValidate = false;
 
@@ -49,6 +50,11 @@ class _LoginPageState extends State<LoginPage> with WidgetsBindingObserver {
     });
   }
 
+  Future<void> saveUserId(String userId) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('userId', userId);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,7 +63,7 @@ class _LoginPageState extends State<LoginPage> with WidgetsBindingObserver {
         elevation: 0.0,
         centerTitle: true,
         backgroundColor: Colors.white,
-        title: Text(
+        title: const Text(
           'Login',
           style: TextStyle(
             fontSize: 32.0,
@@ -69,7 +75,7 @@ class _LoginPageState extends State<LoginPage> with WidgetsBindingObserver {
       body: SingleChildScrollView(
         controller: _scrollController,
         child: Padding(
-          padding: EdgeInsets.only(bottom: 20.0, left: 20.0, right: 20.0),
+          padding: const EdgeInsets.only(bottom: 20.0, left: 20.0, right: 20.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -82,10 +88,10 @@ class _LoginPageState extends State<LoginPage> with WidgetsBindingObserver {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 16.0,
               ),
-              Text(
+              const Text(
                 'Email',
                 style: TextStyle(
                   fontSize: 18.0,
@@ -93,7 +99,7 @@ class _LoginPageState extends State<LoginPage> with WidgetsBindingObserver {
                   color: kDark,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 8.0,
               ),
               CustomTextField(
@@ -103,10 +109,10 @@ class _LoginPageState extends State<LoginPage> with WidgetsBindingObserver {
                 autoFocus: true,
                 validate: _emailValidate,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 12.0,
               ),
-              Text(
+              const Text(
                 'Password',
                 style: TextStyle(
                   fontSize: 18.0,
@@ -114,7 +120,7 @@ class _LoginPageState extends State<LoginPage> with WidgetsBindingObserver {
                   color: kDark,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 8.0,
               ),
               CustomTextField(
@@ -126,7 +132,7 @@ class _LoginPageState extends State<LoginPage> with WidgetsBindingObserver {
               ),
               Row(
                 children: [
-                  Spacer(),
+                  const Spacer(),
                   TextButton(
                     onPressed: () {},
                     style: TextButton.styleFrom(
@@ -143,7 +149,7 @@ class _LoginPageState extends State<LoginPage> with WidgetsBindingObserver {
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20.0,
               ),
               SizedBox(
@@ -151,44 +157,49 @@ class _LoginPageState extends State<LoginPage> with WidgetsBindingObserver {
                 height: 60.0,
                 child: TextButton(
                   onPressed: () async {
-                    if (emailController.text.isNotEmpty &&
-                        passwordController.text.isNotEmpty) {
-                      if (emailController.text == "admin@email.com" &&
-                          passwordController.text == "admin") {
+                    if (emailController.text.isNotEmpty && passwordController.text.isNotEmpty) {
+                      if ((emailController.text == "udit@email.com" &&
+                              passwordController.text == "udit") ||
+                          (emailController.text == 'nilay@email.com' &&
+                              passwordController.text == 'nilay')) {
                         showDialog(
                           context: context,
                           barrierDismissible: false,
                           builder: (context) {
-                            return Center(
+                            return const Center(
                               child: CircularProgressIndicator(
                                 color: Colors.white,
                               ),
                             );
                           },
                         );
+                        if (passwordController.text == 'udit') {
+                          await saveUserId('USR001');
+                        } else {
+                          await saveUserId('USR002');
+                        }
                         await Future.delayed(const Duration(seconds: 2));
+                        if (!context.mounted) return;
                         Navigator.pop(context);
                         Navigator.pushAndRemoveUntil(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => NavigationPage(),
+                            builder: (context) => const NavigationPage(),
                           ),
                           (Route<dynamic> route) => false,
                         );
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
-                            content: Center(
-                              child: Text(
-                                'Invalid email or password',
-                                style: TextStyle(
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.white,
-                                ),
+                            content: const Text(
+                              'Invalid email or password',
+                              style: TextStyle(
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.white,
                               ),
                             ),
-                            backgroundColor: Colors.red[300],
+                            backgroundColor: Colors.red[500],
                             duration: const Duration(seconds: 2),
                           ),
                         );
@@ -202,8 +213,7 @@ class _LoginPageState extends State<LoginPage> with WidgetsBindingObserver {
                   },
                   style: TextButton.styleFrom(
                     backgroundColor: kPrimaryColor,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12.0)),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
                   ),
                   child: const Text(
                     'Login',
@@ -215,22 +225,23 @@ class _LoginPageState extends State<LoginPage> with WidgetsBindingObserver {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20.0,
               ),
               GestureDetector(
                 onTap: () async {
                   FocusScope.of(context).unfocus();
                   await Future.delayed(const Duration(milliseconds: 400));
+                  if (!context.mounted) return;
                   Navigator.pushAndRemoveUntil(
                     context,
-                    MaterialPageRoute(builder: (context) => SignupPage()),
+                    MaterialPageRoute(builder: (context) => const SignupPage()),
                     (Route<dynamic> route) => false,
                   );
                 },
                 child: Center(
                   child: RichText(
-                    text: TextSpan(
+                    text: const TextSpan(
                       text: "Don't have an account? ",
                       style: TextStyle(
                         fontSize: 16.0,
