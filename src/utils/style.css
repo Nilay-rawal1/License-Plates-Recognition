@@ -1,0 +1,50 @@
+/* N Shape Loader */
+.loader {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    font-size: 3rem !important;
+    font-weight: bold !important;
+    position: relative !important;
+  }
+  
+  .n-shape {
+    display: inline-block !important;
+    color: #4f46e5 !important; /* Purple color */
+    animation: rotateN 2s linear infinite !important;
+  }
+  
+  @keyframes rotateN {
+    0% {
+      transform: rotate(0deg) !important;
+    }
+    25% {
+      transform: rotate(90deg) !important;
+    }
+    50% {
+      transform: rotate(180deg) !important;
+    }
+    75% {
+      transform: rotate(270deg) !important;
+    }
+    100% {
+      transform: rotate(360deg) !important;
+    }
+  }
+  
+  /* Optional styling for the back button */
+  button {
+    font-size: 1.1rem !important;
+    padding: 10px 20px !important;
+    margin-top: 20px !important;
+    background-color: #3b82f6 !important;
+    border: none !important;
+    color: white !important;
+    border-radius: 6px !important;
+    cursor: pointer !important;
+  }
+  
+  button:hover {
+    background-color: #2563eb !important;
+  }
+  

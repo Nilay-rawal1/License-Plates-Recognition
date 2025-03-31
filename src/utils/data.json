@@ -1,0 +1,172 @@
+{
+  "users": [
+    {
+      "userId": "USR001",
+      "userName": "Udit Sharma",
+      "email": "udit@email.com",
+      "driverLicenseNumber": "DL-0420190000123",
+      "licensePlateNumber": "DL16 AB 3456",
+      "currentRating": 4.2,
+      "yourReviews": [
+        {
+          "plateNumber": "UP05 MK 1122",
+          "rating": 4.5,
+          "review": "I followed this driver for quite some distance, and I have to say, they were very patient. No unnecessary honking, maintained a steady speed, and actually respected lane discipline! It was refreshing to see someone drive responsibly.",
+          "reviewDate": "2025-03-25"
+        }
+      ],
+      "reviewsAboutYou": [
+        {
+          "plateNumber": "DL16 AB 3456",
+          "rating": 4.5,
+          "review": "This driver was extremely careful and followed all traffic rules properly. They didn’t rush through signals or make abrupt stops. Overall, a very safe and responsible driver.",
+          "reviewDate": "2025-03-26"
+        }
+      ]
+    },
+    {
+      "userId": "USR002",
+      "userName": "Nilay Rawal",
+      "email": "nilay@email.com",
+      "driverLicenseNumber": "MH-0720180000456",
+      "licensePlateNumber": "MH12 XY 7890",
+      "currentRating": 3.6,
+      "yourReviews": [
+        {
+          "plateNumber": "DL10 CJ 5671",
+          "rating": 4.5,
+          "review": "Really courteous driver! They kept a safe distance, used their indicators properly, and even slowed down when pedestrians were crossing. More drivers should be like this!",
+          "reviewDate": "2025-03-24"
+        }
+      ],
+      "reviewsAboutYou": [
+        {
+          "plateNumber": "MH12 XY 7890",
+          "rating": 4.5,
+          "review": "This driver knows how to maintain speed limits and drive responsibly. Even in high-traffic areas, they were calm and composed, which made for a smooth ride.",
+          "reviewDate": "2025-03-25"
+        }
+      ]
+    },
+    {
+      "userId": "USR003",
+      "userName": "Aarav Verma",
+      "email": "aarav@email.com",
+      "driverLicenseNumber": "KA-0820200000678",
+      "licensePlateNumber": "KA05 CD 1234",
+      "currentRating": 4.8,
+      "yourReviews": [
+        {
+          "plateNumber": "MH14 ZX 9988",
+          "rating": 5.0,
+          "review": "Incredibly smooth driver! Maintained lane discipline, used indicators properly, and kept a safe following distance. One of the best drivers I’ve seen.",
+          "reviewDate": "2025-03-20"
+        }
+      ],
+      "reviewsAboutYou": [
+        {
+          "plateNumber": "KA05 CD 1234",
+          "rating": 4.8,
+          "review": "This driver is very experienced and aware of road conditions. Never took unnecessary risks and kept the ride comfortable.",
+          "reviewDate": "2025-03-22"
+        }
+      ]
+    },
+    {
+      "userId": "USR004",
+      "userName": "Riya Kapoor",
+      "email": "riya@email.com",
+      "driverLicenseNumber": "GJ-0620170000890",
+      "licensePlateNumber": "GJ01 XY 4567",
+      "currentRating": 3.9,
+      "yourReviews": [
+        {
+          "plateNumber": "RJ09 LK 7865",
+          "rating": 3.0,
+          "review": "Decent driver but could be more mindful of merging lanes. Some abrupt turns made the ride a little uncomfortable.",
+          "reviewDate": "2025-03-18"
+        }
+      ],
+      "reviewsAboutYou": [
+        {
+          "plateNumber": "GJ01 XY 4567",
+          "rating": 4.0,
+          "review": "Good driver, but could work on better anticipation of traffic flow. Safe and composed overall.",
+          "reviewDate": "2025-03-19"
+        }
+      ]
+    },
+    {
+      "userId": "USR005",
+      "userName": "Ishaan Mehta",
+      "email": "ishaan@email.com",
+      "driverLicenseNumber": "TN-0520160000123",
+      "licensePlateNumber": "TN09 BC 6789",
+      "currentRating": 4.3,
+      "yourReviews": [
+        {
+          "plateNumber": "MP18 RT 2233",
+          "rating": 4.5,
+          "review": "Very responsible driver, maintained speed limits, and followed signals perfectly. A pleasure to drive behind.",
+          "reviewDate": "2025-03-15"
+        }
+      ],
+      "reviewsAboutYou": [
+        {
+          "plateNumber": "TN09 BC 6789",
+          "rating": 4.2,
+          "review": "Handles traffic well and is very composed even in tight spots. Could improve on smoother acceleration.",
+          "reviewDate": "2025-03-16"
+        }
+      ]
+    },
+    {
+      "userId": "USR006",
+      "userName": "Simran Kaur",
+      "email": "simran@email.com",
+      "driverLicenseNumber": "PB-1020180000345",
+      "licensePlateNumber": "PB10 CD 5678",
+      "currentRating": 4.1,
+      "yourReviews": [
+        {
+          "plateNumber": "WB23 FG 8765",
+          "rating": 3.8,
+          "review": "The driver was good but needed better lane discipline. Otherwise, safe and calm on the road.",
+          "reviewDate": "2025-03-10"
+        }
+      ],
+      "reviewsAboutYou": [
+        {
+          "plateNumber": "PB10 CD 5678",
+          "rating": 4.0,
+          "review": "Very smooth driver, but could improve on turns. Overall, safe and aware of surroundings.",
+          "reviewDate": "2025-03-12"
+        }
+      ]
+    },
+    {
+      "userId": "USR007",
+      "userName": "Kabir Malhotra",
+      "email": "kabir@email.com",
+      "driverLicenseNumber": "WB-0320150000789",
+      "licensePlateNumber": "WB07 GH 3456",
+      "currentRating": 3.7,
+      "yourReviews": [
+        {
+          "plateNumber": "UP44 PL 9922",
+          "rating": 2.5,
+          "review": "The driver was a bit aggressive and changed lanes too quickly. Needs to be more cautious.",
+          "reviewDate": "2025-03-05"
+        }
+      ],
+      "reviewsAboutYou": [
+        {
+          "plateNumber": "WB07 GH 3456",
+          "rating": 3.5,
+          "review": "Decent driver but could be more careful in high-traffic areas. Good road sense otherwise.",
+          "reviewDate": "2025-03-07"
+        }
+      ]
+    }
+  ]
+}
