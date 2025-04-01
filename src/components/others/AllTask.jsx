@@ -13,6 +13,7 @@ const AllTask = () => {
 
     {tasks.length === 0 ? (
       <p className="text-gray-400">No Tickets available.</p>
+      
     ) : (
       <div className="space-y-4">
         {tasks.map((task, index) => (

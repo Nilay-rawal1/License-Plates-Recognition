@@ -1,51 +1,48 @@
-import React, { useContext, useEffect, useState } from 'react'
-import Login from './components/Auth/Login'
-import EmployeeDashboard from './components/Dashboard/EmployeeDashboard'
-import AdminDashboard from './components/Dashboard/AdminDashboard'
-import { getLocalStorage } from './utils/localStorage'
-import { AuthContext } from './context/AuthProvider'
+// src/App.jsx
+
+import React, { useState } from "react";
+import { BrowserRouter as Router, Routes, Route, Navigate, useNavigate } from "react-router-dom";
+import Login from "./components/Auth/Login";
+import EmployeeDashboard from "./components/Dashboard/EmployeeDashboard";
+import AdminDashboard from "./components/Dashboard/AdminDashboard";
+import StatsAccident from "./components/others/StatsAccident";
+// Import default export
+import AuthProvider from "./context/AuthProvider"; 
 
 const App = () => {
-
-  // useEffect(() => {
-  //   // setLocalStorage()
-  //   getLocalStorage()
-  // }, [])
-
-  const [User, setUser] = useState(null)
-  const handleLogin = (email, password) => {
-    if (email == 'admin@me.com' && password == '123') {
-      setUser("admin")
-
-
-    }
-
-    else if(email == 'emp1@me.com' && password == '123'){
-      setUser('employee')
-
-    }
-    else {
-      alert("Invaild Credenials")
-    }
-
-  }
-  const data=  useContext(AuthContext)
-  console.log(data)
-  
-
   return (
-    <>
+    <AuthProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Navigate to="/login" />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/admin-dashboard" element={<AdminDashboard />} />
+          <Route path="/employee-dashboard" element={<EmployeeDashboard />} />
+          <Route path="/accident" element={<StatsAccident />} />
+        </Routes>
+      </Router>
+    </AuthProvider>
+  );
+};
 
-      {!User ? <Login handleLogin={handleLogin} /> : ""}
+// Login Page Component with Redirect on Successful Login
+const LoginPage = () => {
+  const navigate = useNavigate();
+  const [error, setError] = useState("");
 
-      {User=='admin'?<AdminDashboard/>: <EmployeeDashboard/>}
+  const handleLogin = (email, password) => {
+    email = email.trim().toLowerCase(); // Normalize email input
 
-      {/* <AdminDashboard /> */}
+    if (email === "admin@me.com" && password === "123") {
+      navigate("/admin-dashboard"); // Redirect to Admin Dashboard
+    } else if (email === "emp1@me.com" && password === "123") {
+      navigate("/employee-dashboard"); // Redirect to Employee Dashboard
+    } else {
+      setError("Invalid Credentials");
+    }
+  };
 
-      {/* <EmployeeDashboard /> */}
+  return <Login handleLogin={handleLogin} error={error} />;
+};
 
-    </>
-  )
-}
-
-export default App
+export default App;

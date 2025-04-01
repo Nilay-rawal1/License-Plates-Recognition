@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import TaskList from "../TaskList/TaskList";
 import AllTask from "./AllTask";
+import { useNavigate } from "react-router-dom";
 
 const TaskListNumber = () => {
+  const navigate = useNavigate();
   const [showTaskList, setShowTaskList] = useState(false);
   const [showAllTasks, setShowAllTasks] = useState(false);
   const [randomReview, setRandomReview] = useState(null);
@@ -23,12 +25,7 @@ const TaskListNumber = () => {
     return () => window.removeEventListener("storage", updateStats);
   }, []);
 
-  const handleRandomReviewClick = () => {
-    if (reviews.length > 0) {
-      const randomIndex = Math.floor(Math.random() * reviews.length);
-      setRandomReview(reviews[randomIndex]);
-    }
-  };
+ 
 
   return (
     <div className="flex flex-wrap mt-10 justify-between gap-6 screen">
@@ -55,13 +52,7 @@ const TaskListNumber = () => {
       ) : (
         <>
           {/* 🔹 Click to Show Random Review */}
-          <div
-            className="py-8 px-10 rounded-xl w-[45%] bg-blue-500 shadow-lg hover:shadow-xl transition duration-300 cursor-pointer"
-            onClick={handleRandomReviewClick}
-          >
-            <h2 className="text-4xl font-semibold text-white">😕 1</h2>
-            <h3 className="text-xl font-medium text-white mt-2">New Reviews</h3>
-          </div>
+         
 
           {/* ✅ Show Random Review (if selected) */}
           {randomReview && (
@@ -93,6 +84,13 @@ const TaskListNumber = () => {
           >
             <h2 className="text-4xl font-semibold text-white">🤔 150</h2>
             <h3 className="text-xl font-medium text-white mt-2">Reviews Featured</h3>
+          </div>
+          <div
+            className="py-8 px-10 rounded-xl w-[45%] bg-blue-500 shadow-lg hover:shadow-xl transition duration-300 cursor-pointer"
+            onClick={() => navigate("/accident")}
+          >
+            <h2 className="text-4xl font-semibold text-white">😕50k </h2>
+            <h3 className="text-xl font-medium text-white mt-2">Accident Statistics</h3>
           </div>
         </>
       )}

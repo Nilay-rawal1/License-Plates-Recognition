@@ -1,16 +1,28 @@
-import React, { createContext } from 'react'
+// src/context/AuthProvider.jsx
 
-export const AuthContext = createContext()
+import React, { createContext, useState } from "react";
 
+// Create context
+const AuthContext = createContext();
+
+// AuthProvider Component
 const AuthProvider = ({ children }) => {
-    return (
-        <div>
-            <AuthContext.Provider value={"Nilay"}>
-                {children}
-            </AuthContext.Provider>
+  const [user, setUser] = useState(null);
 
-        </div>
-    )
-}
+  const login = (userData) => {
+    setUser(userData);
+  };
 
-export default AuthProvider
+  const logout = () => {
+    setUser(null);
+  };
+
+  return (
+    <AuthContext.Provider value={{ user, login, logout }}>
+      {children}
+    </AuthContext.Provider>
+  );
+};
+
+// Default export AuthProvider
+export default AuthProvider;

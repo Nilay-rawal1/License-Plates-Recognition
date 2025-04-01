@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const CreateTask = () => {
   const [formData, setFormData] = useState({
@@ -37,13 +38,21 @@ const CreateTask = () => {
       assignedTo: "",
       category: "",
       description: "",
+      status: "acitve"
     });
 
     alert("Task Submitted Successfully!");
   };
 
   return (
+    <>
+     <Link to="/employee-dashboard">
+              <button className="mt-5 bg-blue-600 text-lg font-medium text-white px-5 py-1 rounded-sm hover:bg-purple-700 transition">
+                Switch to Dashboard
+              </button>
+            </Link>
     <div className="bg-[#1c1c1c] p-5 mt-10">
+     
       <form
         className="flex w-full flex-wrap items-start justify-between"
         onSubmit={handleSubmit}
@@ -119,6 +128,7 @@ const CreateTask = () => {
         </div>
       </form>
     </div>
+    </>
   );
 };
 
