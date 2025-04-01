@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../const/constants.dart';
 import '../providers/data_provider.dart';
+import '../services/ocr_service.dart';
 
 class AddReview extends StatefulWidget {
   final File? image;
@@ -17,13 +18,15 @@ class AddReview extends StatefulWidget {
 }
 
 class _AddReviewState extends State<AddReview> {
+  final OCRService _ocrService = OCRService();
   bool isLoading = false;
   bool isImageUploaded = false;
   File? selectedImage;
 
+  bool isReviewPosting = false;
   double ratingValue = 0.0;
   TextEditingController reviewController = TextEditingController();
-  TextEditingController numberPlateController = TextEditingController(text: 'KA01 BM 9646');
+  TextEditingController numberPlateController = TextEditingController();
 
   Future pickImage() async {
     final ImagePicker picker = ImagePicker();
@@ -34,6 +37,28 @@ class _AddReviewState extends State<AddReview> {
       selectedImage = File(image.path);
       isImageUploaded = true;
     });
+
+    await extractLicensePlate();
+  }
+
+  Future<void> extractLicensePlate() async {
+    if (selectedImage == null) return;
+
+    setState(() => isLoading = true);
+
+    String? plateNumber = await _ocrService.extractLicensePlate(selectedImage!);
+    if (plateNumber != null) {
+      setState(() {
+        numberPlateController.text = plateNumber;
+      });
+    } else {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Failed to extract license plate. Try again.')),
+      );
+    }
+
+    setState(() => isLoading = false);
   }
 
   @override
@@ -65,14 +90,19 @@ class _AddReviewState extends State<AddReview> {
           ),
         ),
       ),
-      body: isImageUploaded
-          ? Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: writeReview(),
-            )
-          : Center(
-              child: addImageButton(context),
-            ),
+      body: isLoading
+          ? const Center(
+              child: CircularProgressIndicator(
+              color: kPrimaryColor,
+            ))
+          : isImageUploaded
+              ? Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: writeReview(),
+                )
+              : Center(
+                  child: addImageButton(context),
+                ),
     );
   }
 
@@ -281,14 +311,14 @@ class _AddReviewState extends State<AddReview> {
               onPressed: () async {
                 final userId = await _getUserId();
 
-                setState(() => isLoading = true);
+                setState(() => isReviewPosting = true);
 
                 if (userId == null || reviewController.text.isEmpty || ratingValue == 0.0) {
                   if (!mounted) return;
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text('Please fill all fields')),
                   );
-                  setState(() => isLoading = false);
+                  setState(() => isReviewPosting = false);
                   return;
                 }
                 await Future.delayed(const Duration(seconds: 2));
@@ -313,7 +343,7 @@ class _AddReviewState extends State<AddReview> {
                 setState(() {
                   reviewController.clear();
                   ratingValue = 0.0;
-                  isLoading = false;
+                  isReviewPosting = false;
                   isImageUploaded = false;
                 });
               },
@@ -323,7 +353,7 @@ class _AddReviewState extends State<AddReview> {
               ),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: isLoading
+                child: isReviewPosting
                     ? const CircularProgressIndicator(color: Colors.white)
                     : const Text(
                         'Post Review',
