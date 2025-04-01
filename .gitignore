@@ -41,3 +41,7 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Service file
+lib/services/ocr_service.dart
+assets/data/data.json
