@@ -67,6 +67,7 @@ class _AddReviewState extends State<AddReview> {
     if (widget.image != null) {
       selectedImage = widget.image;
       isImageUploaded = true;
+      extractLicensePlate();
     }
   }
 
